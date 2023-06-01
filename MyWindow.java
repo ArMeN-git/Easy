@@ -15,7 +15,7 @@ public class MyWindow extends JFrame {
         //createLabels(labels, dao.GetAllStudents());
     }
 
-    public void ShowAllStudents()
+    public void ShowListOfStudents()
     {
         JTextField textField = new JTextField();
         textField.setBackground(new Color(15,230,230));
@@ -25,7 +25,7 @@ public class MyWindow extends JFrame {
         createLabels(labels, dao.GetAllStudents());
     }
 
-    public void ShowStudentsSortedByGrades()
+    public void ShowStudentsByGrades()
     {
         JTextField textField = new JTextField();
         textField.setBackground(new Color(15,230,230));
@@ -36,32 +36,19 @@ public class MyWindow extends JFrame {
         createLabels(labels, dao.GetAllStudents());
     }
 
-    public void ShowStudentsSortedByAlphabetical()
+    public void ShowStudentsWithGivenConditions()
     {
-        JTextField textField = new JTextField();
-        textField.setBackground(new Color(15,230,230));
-        textField.setText("Students sorted by names and surnames");
-        add(textField);
-        labels = new JLabel[this.dao.GetAllStudents().length];
-        dao.alphabeticalSort();
-        createLabels(labels, dao.GetAllStudents());
-    }
-
-    // եթե պետքա մեթոդ, որը տպումա ինր որ student ին յուրահատուկ ձԵով, ասենք կարմիր գույնով, հատուկ տեքստով
-    // DAO ից ուղղակի վերցնում ենք student ներին, ու նույն ձԵ իրանց վրա for անում ոնց որ DAO ում էինք անում
-    // տպել Անի ին  կարմիրով
-    public void ShowSuperStudentInRed()
-    {
-        Student[] students = dao.GetAllStudents();
+        var students = dao.GetAllStudents();
         for (int i = 0; i < students.length; i++)
         {
-            if (students[i].getName() == "Ani")
+            if (students[i].checkGrades() && !students[i].checkDuplicateLetters())
             {
                 JTextField textField = new JTextField();
-                textField.setBackground(new Color(255,0,0));
-                textField.setText("ANI");
+                textField.setBackground(new Color(15,230,230));
+                textField.setText("Students with conditions");
                 add(textField);
-                return;
+                labels = new JLabel[1];
+                createLabels(labels, new Student[]{students[i]});
             }
         }
     }

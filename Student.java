@@ -1,18 +1,18 @@
 import java.util.Arrays;
+import java.util.Date;
+
 public class Student
 {
     private String name;
     private String sname;
-    private int age;
-    private static final String university = "UFAR";
-    private static final String Faculty = "IMA";
     private int[] grades;
+    private Date birthDate;
 
-    public Student(String name, String sname, int age, int[] grades) {
+    public Student(String name, String sname, Date birthDate, int[] grades) {
         this.name = name;
         this.sname = sname;
-        this.age = age;
         this.grades = grades;
+        this.birthDate = birthDate;
     }
 
     public String getName() {
@@ -31,14 +31,6 @@ public class Student
         this.sname = sname;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public int[] getGrades() {
         return grades;
     }
@@ -47,18 +39,12 @@ public class Student
         this.grades = grades;
     }
 
-    public static String getUniversity() {
-        return university;
-    }
-
-    public static String getFaculty() {
-        return Faculty;
-    }
     @Override
     public String toString()
     {
-        return name + " " + sname + " " + age + " " + university +" " + Faculty + " "  + "GPA:" + this.average();
+        return name + " " + sname + " " + birthDate + " " + "GPA:" + this.average();
     }
+
     public float average()
     {
         float average = 0;
@@ -68,61 +54,27 @@ public class Student
         return average / grades.length;
     }
 
-
-    public boolean isPrime() {
-        for (int i = 0; i < this.grades.length; ++i) {
-            boolean isPrime = true;
-            for (int j = 2; j <= grades[i] / 2; j++) {
-
-                if (this.grades[i] % j == 0) {
-                    isPrime = false;
-                    break;
-                }
-            }
-            if (isPrime == true)
-                return true;
-
+    public boolean checkGrades()
+    {
+        int count = 0;
+        for (int i = 0; i < this.grades.length; i++)
+        {
+            if (this.grades[i] == 20)
+                count++;
         }
+        if (count >= 2)
+            return true;
         return false;
     }
-    public boolean ISAveragePrime()
+
+    public boolean checkDuplicateLetters()
     {
-        float average = this.average();
-        for (int i = 2; i <= average/ 2; i++) {
-
-            if (average % i == 0)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    public boolean IsPalindrome()
-    {
-        int low = 0;
-
-        int high = (name.length()) - 1;
-        boolean isPalindrome = true;
-        while (low < high) {
-            if (name.toLowerCase().charAt(low)!= name.toLowerCase().charAt(high))
-            {
-                isPalindrome = false;
-                break;
-            }
-
-            low++;
-            high--;
-        }
-        return isPalindrome;
-    }
-
-    //array-ում թիվա ման գալիս orinak 15
-    public boolean FindNumber()
-    {
-        for (int i = 0;i <this.grades.length;i++ )
+        boolean[] chars = new boolean[127];
+        for (int i = 0; i < this.name.length(); i++)
         {
-            if (grades[i] == 15)
+            if (chars[this.name.charAt(i)] == true)
                 return true;
+            chars[this.name.charAt(i)] = true;
         }
         return false;
     }
