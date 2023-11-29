@@ -1,18 +1,36 @@
-import java.util.Arrays;
-import java.util.Date;
+import java.sql.Date;
 
-public class Student
-{
+public class Student {
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    private int ID;
     private String name;
-    private String sname;
-    private int[] grades;
-    private Date birthDate;
+    private String lastname;
+    private Date birthdate;
+    private int fee;
 
-    public Student(String name, String sname, Date birthDate, int[] grades) {
+    public Student() {
+    }
+
+    public Student(String name, String lastname, Date birthdate, int fee) {
         this.name = name;
-        this.sname = sname;
-        this.grades = grades;
-        this.birthDate = birthDate;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+        this.fee = fee;
+    }
+
+    public Student(int ID, String name, String lastname, Date birthdate, int fee) {
+        this.ID = ID;
+        this.name = name;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+        this.fee = fee;
     }
 
     public String getName() {
@@ -23,59 +41,38 @@ public class Student
         this.name = name;
     }
 
-    public String getSname() {
-        return sname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public int[] getGrades() {
-        return grades;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setGrades(int[] grades) {
-        this.grades = grades;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public int getFee() {
+        return fee;
+    }
+
+    public void setFee(int fee) {
+        this.fee = fee;
     }
 
     @Override
-    public String toString()
-    {
-        return name + " " + sname + " " + birthDate + " " + "GPA:" + this.average();
-    }
-
-    public float average()
-    {
-        float average = 0;
-        for (int i = 0; i < grades.length; ++i) {
-            average += grades[i];
-        }
-        return average / grades.length;
-    }
-
-    public boolean checkGrades()
-    {
-        int count = 0;
-        for (int i = 0; i < this.grades.length; i++)
-        {
-            if (this.grades[i] == 20)
-                count++;
-        }
-        if (count >= 2)
-            return true;
-        return false;
-    }
-
-    public boolean checkDuplicateLetters()
-    {
-        boolean[] chars = new boolean[127];
-        for (int i = 0; i < this.name.length(); i++)
-        {
-            if (chars[this.name.charAt(i)] == true)
-                return true;
-            chars[this.name.charAt(i)] = true;
-        }
-        return false;
+    public String toString() {
+        return "Student{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", birthdate=" + birthdate +
+                ", fee=" + fee +
+                '}';
     }
 }
