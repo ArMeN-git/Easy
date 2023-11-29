@@ -4,6 +4,7 @@ public class Main
     {
         StudentDAO dao = new StudentDAO();
         dao.AddStudents();
+        // some comment
 
         MyWindow window = new MyWindow(dao);
         window.ShowListOfStudents();
