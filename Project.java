@@ -1,5 +1,3 @@
-// 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
-
 public class Project {
     private int id;
     private String projectName;
