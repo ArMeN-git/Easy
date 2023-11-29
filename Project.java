@@ -6,7 +6,6 @@ public class Project {
 
     public Project() {
     }
-
     public Project(int id, String projectName, int year, int studentId) {
         this.id = id;
         this.projectName = projectName;
