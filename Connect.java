@@ -3,14 +3,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connect {
-    Connection con = null;
-    public Connection connectToDB(){
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaexam", "root", "root");
-            return con;
-        } catch (SQLException err) {
-            System.out.println(err.getMessage());
+    public Connection getDbConnection()
+    {
+        try{
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/university", "root", "Ufar2020");
         }
-        return con;
+        catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            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
+            return null;
+        }
     }
 }

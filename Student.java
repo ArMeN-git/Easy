@@ -1,79 +1,56 @@
-import java.sql.Date;
-// 9FqYq3FlIDG7d156Mss9
+import java.time.LocalDate;
 
 public class Student {
-    public int getID() {
-        return ID;
+    private int Id;
+    private String Name;
+    private String Surname;
+    private LocalDate Birthday;
+
+    public Student(String name, String surname, LocalDate birthday) {
+        Name = name;
+        Surname = surname;
+        Birthday = birthday;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getId() {
+        return Id;
     }
 
-    private int ID;
-    private String name;
-    private String lastname;
-    private Date birthdate;
-    private int fee;
-
-    public Student() {
-    }
-
-    public Student(String name, String lastname, Date birthdate, int fee) {
-        this.name = name;
-        this.lastname = lastname;
-        this.birthdate = birthdate;
-        this.fee = fee;
-    }
-
-    public Student(int ID, String name, String lastname, Date birthdate, int fee) {
-        this.ID = ID;
-        this.name = name;
-        this.lastname = lastname;
-        this.birthdate = birthdate;
-        this.fee = fee;
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getSurname() {
+        return Surname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setSurname(String surname) {
+        Surname = surname;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    public LocalDate getBirthday() {
+        return Birthday;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public int getFee() {
-        return fee;
-    }
-
-    public void setFee(int fee) {
-        this.fee = fee;
+    public void setBirthday(LocalDate birthday) {
+        Birthday = birthday;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "ID=" + ID +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", birthdate=" + birthdate +
-                ", fee=" + fee +
+                "Id=" + Id +
+                ", Name='" + Name + '\'' +
+                ", Surname='" + Surname + '\'' +
+                ", Birthday=" + Birthday +
                 '}';
     }
 }

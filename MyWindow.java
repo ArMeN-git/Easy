@@ -1,98 +1,34 @@
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.time.LocalDate;
 
-public class MyWindow extends JFrame implements ActionListener {
-    JLabel nameLab = new JLabel("Name");
-    JTextField name = new JTextField(10);
-    JLabel lastnameLab = new JLabel("Lastname");
-    JTextField lastname = new JTextField(10);
-    JLabel feeLab = new JLabel("Fee");
-    JTextField fee = new JTextField(10);
-    JLabel dayLab = new JLabel("Day");
-    JTextField day = new JTextField(3);
-    JLabel monthLab = new JLabel("Month");
-    JTextField month = new JTextField(5);
-    JLabel yearLab = new JLabel("Year");
-    JTextField year = new JTextField(5);
+public class MyWindow extends JFrame {
+    JTable allStudents;
+    JTable specificStudents;
 
-    JButton buttonAdd = new JButton("Add");
-    JButton buttonDel = new JButton("Delete");
-    JButton buttonUpd = new JButton("Update");
-    JLabel idLab = new JLabel("Student ID");
-    JTextField id = new JTextField(10);
-    JLabel nameLabUD = new JLabel("Name");
-    JTextField nameUD = new JTextField(10);
-    JLabel nothing = new JLabel("                                                                                       ");
-    JButton buttonView = new JButton("View");
-    StudentDAO group = new StudentDAO();
+    private StudentDAO studentDAO = new StudentDAO();
 
-    public MyWindow() throws HeadlessException {
-        setLayout(new FlowLayout());
+    public MyWindow()
+    {
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setVisible(true);
-        setSize(600, 600);
-        add(nameLab);
-        add(name);
-        add(lastnameLab);
-        add(lastname);
-        add(dayLab);
-        add(day);
-        add(monthLab);
-        add(month);
-        add(yearLab);
-        add(year);
-        add(feeLab);
-        add(fee);
+        setSize(800, 800);
 
-        add(buttonAdd);
-        add(buttonView);
+        String[] columns = {"Id", "Name", "Surname", "Birthday"};
 
-        buttonAdd.addActionListener(this);
-        buttonView.addActionListener(this);
+        addTableToWindow("All Students", studentDAO.getStudents(), columns, allStudents, 500, 400);
 
-        add(nothing);
-        add(idLab);
-        add(id);
-        add(nameLabUD);
-        add(nameUD);
-
-        add(buttonDel);
-        add(buttonUpd);
-
-        buttonDel.addActionListener(this);
-        buttonUpd.addActionListener(this);
-
+        addTableToWindow("Students whose names don't contain duplicates and they are under 22", studentDAO.getStudentsWithUniqueNameLettersAndMaxAge(22), columns, specificStudents, 600, 600);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == buttonView) {
-            MyWindowTable myWindowTable = new MyWindowTable();
-        }
-        if (e.getSource() == buttonAdd) {
-            Student st = new Student(name.getText(), lastname.getText(), new Date(Integer.parseInt(year.getText()), Integer.parseInt(month.getText()), Integer.parseInt(day.getText())), Integer.parseInt(fee.getText()));
-            group.create(st);
-            group.addStudentsFromDb();
-            name.setText("");
-            lastname.setText("");
-            day.setText("");
-            month.setText("");
-            year.setText("");
-            fee.setText("");
-
-            System.out.println(group.getStudents());
-        }
-        if (e.getSource() == buttonDel) {
-            group.delete(Integer.parseInt(id.getText()));
-            id.setText("");
-            nameUD.setText("");
-        }
-        if (e.getSource() == buttonUpd) {
-            group.update(Integer.parseInt(id.getText()), nameUD.getText());
-            id.setText("");
-            nameUD.setText("");
-        }
+    public void addTableToWindow(String title, Object[][] data, Object[] columns, JTable table, int width, int height)
+    {
+        add(new JLabel(title));
+        table = new JTable(data, columns);
+        JScrollPane scrollPane = new JScrollPane(table);
+        table.setPreferredScrollableViewportSize(new Dimension(width, height));
+        add(scrollPane);
     }
 }
