@@ -1,0 +1,2 @@
+1.Calculate monthly/yearly average price of stock.
+Output: 2022.01 - XXX, 2022.02 - YYY; 2022 - XX, 2021 - VY                  

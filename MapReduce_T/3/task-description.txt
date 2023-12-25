@@ -1,0 +1,2 @@
+3 Create a report that will show the (average) price change and the number of days/months/years with the same change.
+Output: -1% - 10, 2% - 5, etc.

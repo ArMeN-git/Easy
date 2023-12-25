@@ -1,0 +1,2 @@
+2.Calculate the average stock price change per month/year.
+Output: 2022.01 - X %, 2022.02 - Y %
